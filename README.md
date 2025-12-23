@@ -97,6 +97,3 @@ Intern-Assignment/
 * **Environment Configuration:** Uses `.env` for configurable parameters like `MAX_RETRIES` and `DEFAULT_SAVE_PATH` to ensure code modularity.
 * **Output Safety:** Every export is uniquely timestamped to prevent Windows `PermissionError` conflicts if an existing Excel file is open.
 
-Would you like me to draft the final **Cold Outreach DM** for the founder to send with this link and your resume?
-
-```
