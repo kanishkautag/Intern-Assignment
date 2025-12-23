@@ -1,0 +1,10 @@
+
+credentials.json
+token.pickle
+token.json
+.env
+__pycache__/
+*.py[cod]
+*$py.class
+*.xlsx
+*.csv
