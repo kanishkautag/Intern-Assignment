@@ -1,7 +1,8 @@
 
 # Gmail Intelligence: Recipient Extractor
 
-A high-performance Python-based automation system designed to fetch, sanitize, and extract distinct recipient email IDs from specific senders. Built with the Gmail API for reliability and Streamlit for a live, interactive execution dashboard.
+A high-performance Python-based automation system designed to fetch, sanitize, and extract distinct recipient email IDs from specific senders. Built with the Gmail API for reliability and Streamlit for a live, interactive execution dashboard.<img width="1905" height="910" alt="Screenshot 2025-12-23 084148" src="https://github.com/user-attachments/assets/97525ae0-4cf0-48d0-ba43-a869916d7114" />
+
 
 
 ## Quick Start
@@ -49,13 +50,7 @@ Example:
 ---
 
 ## Screenshots
-
-Add UI and output screenshots here.
-
-```
-[Place screenshots here]
-```
-
+https://github.com/user-attachments/assets/97525ae0-4cf0-48d0-ba43-a869916d7114
 Example:
 
 ```md
