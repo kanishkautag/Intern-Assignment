@@ -1,11 +1,8 @@
-Here is an updated `README.md` with clear placeholders for images and videos, and no emojis.
 
-````md
 # Gmail Intelligence: Recipient Extractor
 
 A high-performance Python-based automation system designed to fetch, sanitize, and extract distinct recipient email IDs from specific senders. Built with the Gmail API for reliability and Streamlit for a live, interactive execution dashboard.
 
----
 
 ## Quick Start
 
@@ -117,26 +114,4 @@ Intern-Assignment/
 * **Secret Protection:** Sensitive files like `credentials.json` and `token.pickle` are excluded from version control using `.gitignore`.
 * **Output Safety:** To avoid Windows permission errors when Excel files are open, every export is timestamped, for example `recipients_20251223_080000.xlsx`.
 
----
 
-## Potential AI Enhancements
-
-* **LLM Classification:** Classify recipients by domain or email context.
-* **Vector Search:** Store recipient metadata in a vector database such as FAISS to discover clusters across sender profiles.
-
----
-
-## Submission Details
-
-**Candidate:** Kanishka
-**Role:** AI Engineer or Tech Co founder Evaluation
-**Organization:** WorkCortex Intelligence Pvt Ltd
-
----
-
-## Contact
-
-If you would like to discuss design decisions, scaling strategies, or AI extensions, feel free to reach out.
-
-```
-```
