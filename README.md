@@ -1,5 +1,5 @@
 
-# Gmail Intelligence: Recipient Extractor
+# Intern Assignment
 
 A high-performance Python-based automation system designed to fetch, sanitize, and extract distinct recipient email IDs from specific senders. Built with the Gmail API for reliability and Streamlit for a live, interactive execution dashboard.
 
