@@ -33,14 +33,11 @@ streamlit run main.py
 ---
 
 ## Demo
-
-
-https://github.com/user-attachments/assets/f54a8a39-b50b-46c6-92b9-7a13eb0db489
-
-
+https://github.com/user-attachments/assets/858852c4-3674-44ad-aa3b-8744a0a2ab2f
 
 ## Screenshots
-<img width="1905" height="910" alt="Screenshot 2025-12-23 084148" src="https://github.com/user-attachments/assets/97525ae0-4cf0-48d0-ba43-a869916d7114" />
+<img width="1910" height="906" alt="image" src="https://github.com/user-attachments/assets/ce87266c-0587-4423-8dd9-f91ee383189e" />
+
 
 
 ## Architecture and Design Decisions
