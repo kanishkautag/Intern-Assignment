@@ -56,7 +56,7 @@ Instead of using Selenium or Playwright, which are resource heavy and prone to b
 
 Email headers often contain friendly names like `Kanishka <user@gmail.com>`.
 
-* A Regex based extraction layer isolates only RFC 5322 compliant email addresses.
+* A Regex based extraction layer isolates compliant email addresses.
 * All addresses are normalized to lowercase and stored in a Python set to guarantee uniqueness with efficiency.
 
 ### 3. UI: Live Tailing Logs
