@@ -1,53 +1,71 @@
 import streamlit as st
 import os
+import time
 import pandas as pd
 from datetime import datetime
 from services.logger import LiveLogger
 from services.gmail_service import GmailService
 
-st.set_page_config(page_title="WorkCortex Intelligence Tool", layout="wide")
+st.set_page_config(page_title="WorkCortex AI Engine", layout="wide")
 
-st.title("📧 AI Gmail Intelligence Tool")
-st.markdown("Extract cleaned, distinct recipient IDs from any sender.")
+# UI State Management
+if 'paused' not in st.session_state: st.session_state.paused = False
+if 'abort' not in st.session_state: st.session_state.abort = False
 
-# Configuration Sidebar
+# Sidebar Config
 with st.sidebar:
-    st.header("Settings")
-    sender = st.text_input("Sender Email Address", value="newsletter@example.com")
-    local_path = st.text_input("Save Folder Path", value=os.getcwd())
-    st.info("Ensure credentials.json is in the root directory.")
+    st.header("Configuration")
+    sender = st.text_input("Sender Email", "newsletter@github.com")
+    out_dir = st.text_input("Output Folder", os.getcwd())
+    filename = st.text_input("Filename", "recipients.xlsx")
+    limit = st.slider("Max Emails to Scan", 1, 500, 50)
+    
+    st.divider()
+    # Controls
+    col_a, col_b = st.columns(2)
+    start_btn = col_a.button("🚀 Start", use_container_width=True)
+    abort_btn = col_b.button("🛑 Abort", use_container_width=True)
+    
+    if st.button("⏸ Pause / ▶ Resume"):
+        st.session_state.paused = not st.session_state.paused
 
-# Log Table Area
-st.subheader("Live Execution Logs")
-log_container = st.empty()
-logger = LiveLogger(log_container)
+if abort_btn: st.session_state.abort = True
 
-if st.button("🚀 Start Extraction"):
+st.title("WorkCortex Intelligence System")
+log_space = st.empty()
+logger = LiveLogger(log_space)
+
+if start_btn:
+    st.session_state.abort = False
+    start_time = time.time()
+    
     try:
-        # 1. Initialize & Auth
         engine = GmailService(logger)
-        engine.authenticate()
         
-        # 2. Fetch & Clean
-        emails = engine.fetch_emails(sender)
+        # 1. Auth
+        if not engine.authenticate():
+            st.error("Authentication Failed.")
+            st.stop()
+            
+        # 2. Fetch
+        data = engine.fetch_distinct_recipients(sender, limit)
         
-        if not emails:
-            st.warning("No emails found from that sender.")
-        else:
-            # 3. Save to Excel
-            logger.log("Saving to Excel", "Pandas/Openpyxl", "STARTED")
-            
-            df = pd.DataFrame(emails, columns=["Recipient Email IDs"])
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            file_name = f"recipients_{timestamp}.xlsx"
-            full_save_path = os.path.join(local_path, file_name)
-            
-            df.to_excel(full_save_path, index=False)
-            
-            logger.log("Saving to Excel", "Pandas/Openpyxl", "SUCCESS")
-            st.success(f"Done! {len(emails)} unique IDs saved to: {full_save_path}")
-            st.balloons()
-            
+        # 3. Save
+        logger.log("Saving to Excel", "Pandas", "STARTED")
+        df = pd.DataFrame(data, columns=["Recipient Email IDs"])
+        path = os.path.join(out_dir, f"{datetime.now().strftime('%H%M%S')}_{filename}")
+        df.to_excel(path, index=False)
+        logger.log("Saving to Excel", "Pandas", "SUCCESS")
+        
+        # Run Summary
+        st.divider()
+        st.subheader("Run Summary")
+        c1, c2, c3 = st.columns(3)
+        c1.metric("Unique Emails Found", len(data))
+        c2.metric("Execution Time", f"{round(time.time() - start_time, 2)}s")
+        c3.info(f"Saved to: {path}")
+        
+    except InterruptedError:
+        st.warning("Process Aborted by User.")
     except Exception as e:
-        logger.log(f"Failure: {str(e)}", "System", "FAILED")
-        st.error(f"Error during execution: {e}")
+        st.error(f"Critical System Error: {e}")
